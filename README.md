@@ -1,7 +1,6 @@
 # HW4 — Настройка алертинга в Grafana при нарушении SLO
 
 
-
 ## Цель работы
 
 - Развернуть систему наблюдаемости (Prometheus + Grafana)
@@ -9,7 +8,6 @@
 - Настроить алерт при нарушении SLO
 - Проверить корректность срабатывания алерта
 
----
 
 ## Стек технологий
 
@@ -19,7 +17,6 @@
 - Grafana
 - Docker / Docker Compose
 
----
 
 ## Определение SLO
 
@@ -27,7 +24,6 @@
 
 > p95 latency инференса модели должна быть **меньше 1 секунды**
 
----
 
 ## Используемая метрика
 
@@ -46,7 +42,6 @@ histogram_quantile(
 )
 ```
 
----
 
 ## Alert rule
 
@@ -58,7 +53,7 @@ histogram_quantile(
 
 Алерт настроен через **Grafana UI** с использованием Unified Alerting.
 
----
+
 
 ## Grafana Dashboard
 
@@ -75,7 +70,7 @@ histogram_quantile(
 grafana/dashboard.json
 ```
 
----
+
 
 ## Скриншоты
 
@@ -91,7 +86,7 @@ Docker Desktop с запущенными контейнерами prometheus и 
 
 ![Docker Desktop](screenshots/docker_run_2.png)
 
----
+
 
 ### 2. Prometheus
 
@@ -99,7 +94,7 @@ Prometheus targets — ML-сервис успешно подключен и им
 
 ![Prometheus Targets](screenshots/prometheus.png)
 
----
+
 
 ### 3. Grafana — начальная страница
 
@@ -107,7 +102,7 @@ Prometheus targets — ML-сервис успешно подключен и им
 
 ![Grafana Home](screenshots/grafana.png)
 
----
+
 
 ### 4. Настройка PromQL запроса
 
@@ -115,7 +110,7 @@ Prometheus targets — ML-сервис успешно подключен и им
 
 ![Grafana Query Editor](screenshots/grafana_query.png)
 
----
+
 
 ### 5. Grafana Dashboard
 
@@ -123,7 +118,7 @@ Prometheus targets — ML-сервис успешно подключен и им
 
 ![Grafana Dashboard](screenshots/dashboard.png)
 
----
+
 
 ### 6. Alert Rule — конфигурация
 
@@ -131,7 +126,7 @@ Prometheus targets — ML-сервис успешно подключен и им
 
 ![Grafana Alert Rule](screenshots/grafana_alert_rule.png)
 
----
+
 
 ### 7. Alert в состоянии Firing
 
@@ -139,7 +134,7 @@ Prometheus targets — ML-сервис успешно подключен и им
 
 ![Grafana Alert Firing](screenshots/grafana_alerts.png)
 
----
+
 
 ### 8. Открытие Prometheus и Grafana
 
@@ -147,7 +142,6 @@ Prometheus targets — ML-сервис успешно подключен и им
 
 ![Open URLs](screenshots/prom_grap_request.png)
 
----
 
 ## Как запустить проект
 
@@ -160,7 +154,7 @@ docker compose up -d
 * Prometheus: [http://localhost:9090](http://localhost:9090)
 * Grafana: [http://localhost:3000](http://localhost:3000)
 
----
+
 
 ### 2. Запуск ML-сервиса
 
@@ -170,7 +164,7 @@ docker compose up -d
 uvicorn src.main:app --host 0.0.0.0 --port 8000
 ```
 
----
+
 
 ### 3. Генерация нагрузки (для проверки алерта)
 
@@ -180,7 +174,7 @@ uvicorn src.main:app --host 0.0.0.0 --port 8000
 
 После этого алерт переходит в состояние **Firing**.
 
----
+
 
 ##  Структура репозитория
 
