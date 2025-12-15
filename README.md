@@ -1,6 +1,6 @@
 # HW4 — Настройка алертинга в Grafana при нарушении SLO
 
----
+
 
 ## Цель работы
 
@@ -79,17 +79,73 @@ grafana/dashboard.json
 
 ## Скриншоты
 
-Скриншоты, подтверждающие корректную работу системы, находятся в папке:
+Скриншоты, подтверждающие корректную работу системы:
 
-```text
-screenshots/
-```
+### 1. Запуск Docker контейнеров
 
-Включают:
+Запуск Prometheus и Grafana через `docker compose up -d`:
 
-* Grafana dashboard с графиком p95 latency
-* Alert rule в состоянии **Firing**
-* Prometheus targets со статусом **UP**
+![Docker Compose запуск](screenshots/docker_run.png)
+
+Docker Desktop с запущенными контейнерами prometheus и grafana:
+
+![Docker Desktop](screenshots/docker_run_2.png)
+
+---
+
+### 2. Prometheus
+
+Prometheus targets — ML-сервис успешно подключен и имеет статус **UP**:
+
+![Prometheus Targets](screenshots/prometheus.png)
+
+---
+
+### 3. Grafana — начальная страница
+
+Главная страница Grafana после успешного запуска:
+
+![Grafana Home](screenshots/grafana.png)
+
+---
+
+### 4. Настройка PromQL запроса
+
+Редактирование панели дашборда с PromQL запросом для расчёта p95 latency:
+
+![Grafana Query Editor](screenshots/grafana_query.png)
+
+---
+
+### 5. Grafana Dashboard
+
+Дашборд с графиком p95 latency инференса модели (значение ~2.42 секунды превышает SLO):
+
+![Grafana Dashboard](screenshots/dashboard.png)
+
+---
+
+### 6. Alert Rule — конфигурация
+
+Настройка алерта `HW4_alert_rule` с условием срабатывания при p95 > 1 секунды:
+
+![Grafana Alert Rule](screenshots/grafana_alert_rule.png)
+
+---
+
+### 7. Alert в состоянии Firing
+
+Алерт перешёл в состояние **Firing** после генерации нагрузки с высокой задержкой:
+
+![Grafana Alert Firing](screenshots/grafana_alerts.png)
+
+---
+
+### 8. Открытие Prometheus и Grafana
+
+Команды для открытия веб-интерфейсов Prometheus и Grafana в браузере:
+
+![Open URLs](screenshots/prom_grap_request.png)
 
 ---
 
@@ -138,8 +194,13 @@ MLOPS_HW4_DATA/
 │   └── dashboard.json
 ├── screenshots/
 │   ├── dashboard.png
-│   ├── grafana_alert.png
+│   ├── docker_run.png
+│   ├── docker_run_2.png
+│   ├── grafana.png
+│   ├── grafana_alert_rule.png
 │   ├── grafana_alerts.png
+│   ├── grafana_query.png
+│   ├── prom_grap_request.png
 │   └── prometheus.png
 ├── venvhw4/
 └── README.md
